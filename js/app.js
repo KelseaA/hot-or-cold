@@ -28,25 +28,25 @@ $(".new").on("click", function(){
 });
 $("#guessButton").on("click", function(){
 	getUserGuess($("#userGuess").val());
-	// ******not working********
-	// allows user to press enter to submit guess
-	// $("#userGuess").keyup(function(event){
-	// 	if(event.keyCode == 13) {
-	// 		$("#guessButton").click();
-	// 	}
-	// });
+});
+$("#userGuess").keyup(function(event){
+	if(event.keyCode == 13) {
+		$("#guessButton").click();
+	}
 });
 
 // new game function
-// ********not working*********
-// function newGame(){
-// 	generateNumber();
-// 	console.log(secretNumber);
-// 	count = 0;
-// 	userGuesses = [];
-// 	userGuess = "";
+function newGame(){
+	generateNumber();
+	console.log(secretNumber);
+	count = 0;
+	$("#count").text("0");
+	userGuesses = [];
+	userGuess = "";
+	$("#feedback").text("Make your Guess!");
+	$("#guessList").empty();
 
-// }
+}
 
 //generate secret number
 function generateNumber(){
@@ -71,6 +71,7 @@ function getUserGuess(userGuess){
 		guessCounter();
 		hint(userGuess);
 		checkUserGuess(userGuess);
+		trackGuess(userGuess);
 	}
 }
 
@@ -126,5 +127,7 @@ function hint(guess){
 
 // track user past guesses function
 function trackGuess(){
-	// not sure what to do here
+	if ($.inArray(userGuess, userGuesses) != -1){
+		alert("You already guessed that!");
+	}	
 }
